@@ -1,7 +1,6 @@
 package com.seb.services.weather.service;
 
 import com.seb.services.weather.enums.WeatherType;
-import com.seb.services.weather.service.WeatherService;
 
 /**
  * Created by sebastien.vandamme@gmail.com on 12/07/2014.

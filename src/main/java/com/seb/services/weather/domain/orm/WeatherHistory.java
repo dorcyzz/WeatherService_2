@@ -1,4 +1,4 @@
-package com.seb.services.weather.data.orm;
+package com.seb.services.weather.domain.orm;
 
 import com.seb.services.weather.enums.WeatherType;
 import org.hibernate.annotations.Type;

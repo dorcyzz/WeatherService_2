@@ -1,4 +1,4 @@
-package com.seb.services.weather.data.orm;
+package com.seb.services.weather.domain.orm;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;

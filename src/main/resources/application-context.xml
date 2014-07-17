@@ -17,11 +17,20 @@
         <property name="url" value="jdbc:mysql://localhost:3306/sva_test"/>
         <property name="username" value="root"/>
         <property name="password" value="9yhj0vvv"/>
+        <property name="initialSize" value="5"/>
+        <property name="maxTotal" value="10"/>
     </bean>
 
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+        <property name="packagesToScan" value="com.seb.services.weather.domain"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+            </props>
+        </property>
     </bean>
+
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 </beans>

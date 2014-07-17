@@ -1,4 +1,4 @@
-package com.seb.services.weather.data.simulator;
+package com.seb.services.weather.domain.simulator;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

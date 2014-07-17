@@ -1,8 +1,9 @@
-package com.seb.services.weather.data.dao;
+package com.seb.services.weather.domain.dao;
 
-import com.seb.services.weather.data.orm.City;
+import com.seb.services.weather.domain.orm.City;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by sebastien.vandamme@gmail.com on 12/07/2014.
  */
 @Repository
+@Transactional
 public class CityDaoImpl implements CityDao {
     @Autowired
     private SessionFactory sessionFactory;
@@ -27,34 +29,39 @@ public class CityDaoImpl implements CityDao {
     }
 
     @Override
-    @Transactional
     public List<City> list() {
-        List<City> cities = (List<City>) sessionFactory.getCurrentSession()
+        List<City> cities = (List<City>) getCurrentSession()
                 .createCriteria(City.class)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
         return cities;
     }
 
-    @Override
-    @Transactional
-    public void saveOrUpdate(City city) {
-        sessionFactory.getCurrentSession().saveOrUpdate(city);
+    private Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
     }
 
     @Override
-    @Transactional
+    public void save(City city) {
+        getCurrentSession().save(city);
+    }
+
+    @Override
+    public void update(City city) {
+        getCurrentSession().update(city);
+    }
+
+    @Override
     public void delete(int id) {
         City cityToDelete = new City();
         cityToDelete.setId(id);
-        sessionFactory.getCurrentSession().delete(cityToDelete);
+        getCurrentSession().delete(cityToDelete);
     }
 
     @Override
-    @Transactional
     public City getCity(String name) {
         String hql = "from City where name = " + name;
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Query query = getCurrentSession().createQuery(hql);
 
         List<City> cities = (List<City>) query.list();
 

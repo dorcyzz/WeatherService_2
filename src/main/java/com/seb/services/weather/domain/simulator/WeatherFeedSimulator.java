@@ -1,6 +1,6 @@
-package com.seb.services.weather.data.simulator;
+package com.seb.services.weather.domain.simulator;
 
-import com.seb.services.weather.data.orm.City;
+import com.seb.services.weather.domain.orm.City;
 import com.seb.services.weather.enums.WeatherType;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import java.util.Random;
 @Component
 public class WeatherFeedSimulator implements WeatherFeed {
 
-    protected WeatherFeedSimulator(){
+    protected WeatherFeedSimulator() {
         super();
     }
 

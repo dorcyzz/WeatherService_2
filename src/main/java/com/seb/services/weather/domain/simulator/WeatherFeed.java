@@ -1,6 +1,6 @@
-package com.seb.services.weather.data.simulator;
+package com.seb.services.weather.domain.simulator;
 
-import com.seb.services.weather.data.orm.City;
+import com.seb.services.weather.domain.orm.City;
 import com.seb.services.weather.enums.WeatherType;
 
 /**
