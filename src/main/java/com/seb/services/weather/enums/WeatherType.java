@@ -10,5 +10,5 @@ public enum WeatherType {
     CLOUDY,
     WINDY,
     FOGGY,
-    SNOWY;
+    SNOWY
 }

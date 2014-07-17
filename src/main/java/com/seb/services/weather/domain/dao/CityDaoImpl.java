@@ -30,11 +30,9 @@ public class CityDaoImpl implements CityDao {
 
     @Override
     public List<City> list() {
-        List<City> cities = (List<City>) getCurrentSession()
+        return (List<City>) getCurrentSession()
                 .createCriteria(City.class)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
-        return cities;
     }
 
     private Session getCurrentSession() {

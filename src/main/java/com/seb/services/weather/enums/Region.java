@@ -5,5 +5,5 @@ package com.seb.services.weather.enums;
  */
 public enum Region {
 
-    FLANDERS, WALLONIA, BRUSSELS;
+    FLANDERS, WALLONIA, BRUSSELS
 }

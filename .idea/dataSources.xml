@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="130230125">
+  <component name="DataSourceManagerImpl" format="xml" hash="4018344984">
     <data-source source="LOCAL" name="hibernate.cfg.xml" uuid="33cac689-1f40-4d2e-830f-4cf9b6d0f42b">
       <driver-ref>hsqldb.remote</driver-ref>
       <jdbc-driver>org.hsqldb.jdbcDriver</jdbc-driver>
       <jdbc-url>jdbc:hsqldb:hsql://localhost</jdbc-url>
       <user-name>sa</user-name>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="MySQL - sva_test@localhost" uuid="050e5db3-688e-4aa2-9986-8455fea7fac8">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/sva_test</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>df93dfd3dfc2dfc0df9adfdcdfdcdfdc</user-password>
+      <driver-properties>
+        <property name="zeroDateTimeBehavior" value="convertToNull" />
+        <property name="tinyInt1isBit" value="false" />
+      </driver-properties>
       <libraries />
     </data-source>
   </component>

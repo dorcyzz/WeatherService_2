@@ -16,7 +16,7 @@ public class TemperatureHistory {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "cityId", nullable = false)
     private City city;
 
     private int temperature;

@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by sebastien.vandamme@gmail.com on 12/07/2014.
+ * Project ${PROJECT_NAME}
  */
 public interface CityDao {
 

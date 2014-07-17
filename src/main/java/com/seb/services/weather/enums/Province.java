@@ -2,6 +2,7 @@ package com.seb.services.weather.enums;
 
 /**
  * Created by sebastien.vandamme@gmail.com on 12/07/2014.
+ * Project ${PROJECT_NAME}
  */
 public enum Province {
     ANVERS,
@@ -13,5 +14,5 @@ public enum Province {
     WALLOON_BRABANT,
     NAMUR,
     LIEGE,
-    LUXEMBOURG;
+    LUXEMBOURG
 }

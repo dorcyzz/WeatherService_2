@@ -17,7 +17,7 @@ public class WeatherHistory {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "cityId", nullable = false)
     private City city;
 
     @Enumerated(EnumType.STRING)

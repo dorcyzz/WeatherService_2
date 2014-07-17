@@ -26,7 +26,6 @@ public class City {
     private Region region;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "id")
-    @JoinColumn(name = "id")
     private List<TemperatureHistory> temperatureHistory;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "id")
