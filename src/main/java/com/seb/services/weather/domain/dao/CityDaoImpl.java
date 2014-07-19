@@ -7,15 +7,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by sebastien.vandamme@gmail.com on 12/07/2014.
  */
 @Repository
-@Transactional
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, isolation = Isolation.READ_UNCOMMITTED)
 public class CityDaoImpl implements CityDao {
     @Autowired
     private SessionFactory sessionFactory;
@@ -28,6 +30,10 @@ public class CityDaoImpl implements CityDao {
         this.sessionFactory = sessionFactory;
     }
 
+    private Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
+    }
+
     @Override
     public List<City> list() {
         return (List<City>) getCurrentSession()
@@ -35,21 +41,20 @@ public class CityDaoImpl implements CityDao {
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 
-    private Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
-    }
-
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void save(City city) {
         getCurrentSession().save(city);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void update(City city) {
         getCurrentSession().update(city);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void delete(int id) {
         City cityToDelete = new City();
         cityToDelete.setId(id);

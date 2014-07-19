@@ -1,4 +1,4 @@
-package com.seb.services.weather.service;
+package com.seb.services.weather.webservices;
 
 import com.seb.services.weather.enums.WeatherType;
 
