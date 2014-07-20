@@ -22,9 +22,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="WeatherService" />
+        <module name="WeatherService-dao" />
+        <module name="WeatherService-domain-model" />
+        <module name="WeatherService-main" />
+        <module name="WeatherService-tools" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="WeatherService-dao" target="1.7" />
+      <module name="WeatherService-domain-model" target="1.7" />
+      <module name="WeatherService-main" target="1.7" />
+      <module name="WeatherService-tools" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
 

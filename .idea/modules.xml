@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WeatherService.iml" filepath="$PROJECT_DIR$/WeatherService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WeatherService-dao/WeatherService-dao.iml" filepath="$PROJECT_DIR$/WeatherService-dao/WeatherService-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WeatherService-domain-model/WeatherService-domain-model.iml" filepath="$PROJECT_DIR$/WeatherService-domain-model/WeatherService-domain-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WeatherService-main/WeatherService-main.iml" filepath="$PROJECT_DIR$/WeatherService-main/WeatherService-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WeatherService-tools/WeatherService-tools.iml" filepath="$PROJECT_DIR$/WeatherService-tools/WeatherService-tools.iml" />
     </modules>
   </component>
 </project>
