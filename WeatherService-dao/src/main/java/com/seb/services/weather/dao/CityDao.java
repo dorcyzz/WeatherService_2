@@ -17,5 +17,5 @@ public interface CityDao {
 
     public void update(City city);
 
-    public void delete(int id);
+    public void delete(String name);
 }

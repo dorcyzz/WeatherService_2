@@ -1,69 +1,69 @@
+ALTER TABLE TemperatureHistory
+DROP
+FOREIGN KEY FK_m5qt12jfk71x85mh7ap168scv;
 
-    alter table TemperatureHistory
-        drop
-        foreign key FK_tuhu4m9xhcesggcb9kmamek6
+ALTER TABLE TemperatureHistory
+DROP
+FOREIGN KEY FK_na6p28l66hd1lj0v1ofhc8v8w;
 
-    alter table TemperatureHistory
-        drop
-        foreign key FK_44w7dfp6sjhwse4wjpajjwng8
+ALTER TABLE WeatherHistory
+DROP
+FOREIGN KEY FK_2bpuebs9b4mbmyynvyhjaey9q;
 
-    alter table WeatherHistory
-        drop
-        foreign key FK_ipmokhoklnyf57g3khvrw7kik
+ALTER TABLE WeatherHistory
+DROP
+FOREIGN KEY FK_68g2qh94qy2n6nl3xao65uc0v;
 
-    alter table WeatherHistory
-        drop
-        foreign key FK_1ikwegn2yewtt7p0yy2dhjijg
+DROP TABLE IF EXISTS City;
 
-    drop table if exists City
+DROP TABLE IF EXISTS TemperatureHistory;
 
-    drop table if exists TemperatureHistory
+DROP TABLE IF EXISTS WeatherHistory;
 
-    drop table if exists WeatherHistory
+CREATE TABLE City (
+  name       VARCHAR(255) NOT NULL,
+  population INTEGER      NOT NULL,
+  province   VARCHAR(255),
+  region     VARCHAR(255),
+  PRIMARY KEY (name)
+);
 
-    create table City (
-        id integer not null auto_increment,
-        name varchar(255),
-        population integer not null,
-        province varchar(255),
-        region varchar(255),
-        primary key (id)
-    )
+CREATE TABLE TemperatureHistory (
+  id          INTEGER      NOT NULL AUTO_INCREMENT,
+  date        DATE,
+  name        VARCHAR(255),
+  temperature INTEGER      NOT NULL,
+  time        TIME,
+  cityName    VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+);
 
-    create table TemperatureHistory (
-        id integer not null auto_increment,
-        date date,
-        temperature integer not null,
-        time time,
-        cityId integer not null,
-        primary key (id)
-    )
+CREATE TABLE WeatherHistory (
+  id       INTEGER      NOT NULL AUTO_INCREMENT,
+  date     DATE,
+  name     VARCHAR(255),
+  time     TIME,
+  weather  VARCHAR(255),
+  cityName VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+);
 
-    create table WeatherHistory (
-        id integer not null auto_increment,
-        date date,
-        time time,
-        weather varchar(255),
-        cityId integer not null,
-        primary key (id)
-    )
+ALTER TABLE TemperatureHistory
+ADD CONSTRAINT FK_m5qt12jfk71x85mh7ap168scv
+FOREIGN KEY (cityName)
+REFERENCES City (name);
 
-    alter table TemperatureHistory
-        add constraint FK_tuhu4m9xhcesggcb9kmamek6
-        foreign key (cityId)
-        references City (id)
+ALTER TABLE TemperatureHistory
+ADD CONSTRAINT FK_na6p28l66hd1lj0v1ofhc8v8w
+FOREIGN KEY (name)
+REFERENCES City (name);
 
-    alter table TemperatureHistory
-        add constraint FK_44w7dfp6sjhwse4wjpajjwng8
-        foreign key (id)
-        references City (id)
+ALTER TABLE WeatherHistory
+ADD CONSTRAINT FK_2bpuebs9b4mbmyynvyhjaey9q
+FOREIGN KEY (cityName)
+REFERENCES City (name);
 
-    alter table WeatherHistory
-        add constraint FK_ipmokhoklnyf57g3khvrw7kik
-        foreign key (cityId)
-        references City (id)
-
-    alter table WeatherHistory
-        add constraint FK_1ikwegn2yewtt7p0yy2dhjijg
-        foreign key (id)
-        references City (id)
+ALTER TABLE WeatherHistory
+ADD CONSTRAINT FK_68g2qh94qy2n6nl3xao65uc0v
+FOREIGN KEY (name)
+REFERENCES City (name);

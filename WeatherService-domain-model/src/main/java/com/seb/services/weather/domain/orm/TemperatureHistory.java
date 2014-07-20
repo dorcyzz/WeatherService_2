@@ -15,8 +15,10 @@ public class TemperatureHistory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    private String name;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cityId", nullable = false)
+    @JoinColumn(name = "cityName", nullable = false)
     private City city;
 
     private int temperature;
@@ -33,6 +35,14 @@ public class TemperatureHistory {
 
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public City getCity() {

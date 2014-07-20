@@ -12,9 +12,6 @@ import java.util.List;
 @Entity
 public class City {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
     private String name;
 
     private int population;
@@ -25,22 +22,14 @@ public class City {
     @Enumerated(EnumType.STRING)
     private Region region;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "name")
     private List<TemperatureHistory> temperatureHistory;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "name")
     private List<WeatherHistory> weatherHistory;
 
     public City() {
         super();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -98,7 +87,6 @@ public class City {
 
         City city = (City) o;
 
-        if (id != city.id) return false;
         if (population != city.population) return false;
         if (name != null ? !name.equals(city.name) : city.name != null) return false;
         if (province != city.province) return false;
@@ -113,8 +101,7 @@ public class City {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        int result = name != null ? name.hashCode() : 0;
         result = 31 * result + population;
         result = 31 * result + (province != null ? province.hashCode() : 0);
         result = 31 * result + (region != null ? region.hashCode() : 0);
@@ -125,6 +112,6 @@ public class City {
 
     @Override
     public String toString() {
-        return "The city of " + getName() + " (id = " + getId() + "), population = " + getPopulation() + ", region = " + getRegion() + ", Province = " + getProvince();
+        return "The city of " + getName() + " , population = " + getPopulation() + ", region = " + getRegion() + ", Province = " + getProvince();
     }
 }
