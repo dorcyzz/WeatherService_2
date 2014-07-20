@@ -1,21 +1,22 @@
 package com.seb.services.weather.aspects.email;
 
 import com.seb.services.weather.service.email.EmailServiceImpl;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by sebastien.vandamme@gmail.com on 19/07/2014.
  */
+@Component
 @Aspect
 public class EmailLogging {
-    private static final Logger LOGGER = LogManager.getLogger(EmailServiceImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(EmailServiceImpl.class);
 
-    @Pointcut("execution(* com.seb.services.weather.service.email.EmailService.sendEmail())")
+    @Pointcut("execution(* com.seb.services.weather.service.email.EmailServiceImpl.sendEmail(..))")
     public void logging() {
 
     }
