@@ -30,8 +30,8 @@ public class ClassPathScanningCandidateComponentProvider implements ResourceLoad
 
     private static final String DEFAULT_RESOURCE_PATTERN = "**/*.class";
     private String myResourcePattern = DEFAULT_RESOURCE_PATTERN;
-    private final List<TypeFilter> myIncludeFilters = new LinkedList<TypeFilter>();
-    private final List<TypeFilter> myExcludeFilters = new LinkedList<TypeFilter>();
+    private final List<TypeFilter> myIncludeFilters = new LinkedList<>();
+    private final List<TypeFilter> myExcludeFilters = new LinkedList<>();
     private ResourcePatternResolver myResourcePatternResolver = new PathMatchingResourcePatternResolver();
     private MetadataReaderFactory myMetadataReaderFactory = new CachingMetadataReaderFactory(myResourcePatternResolver);
 
@@ -96,7 +96,7 @@ public class ClassPathScanningCandidateComponentProvider implements ResourceLoad
      * @return a corresponding Set of autodetected class name (only concrete class)
      */
     public Set<Class<?>> findCandidateComponents(String aBasePackage) {
-        Set<Class<?>> theCandidates = new HashSet<Class<?>>();
+        Set<Class<?>> theCandidates = new HashSet<>();
         try {
             String thePackageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + ClassUtils.convertClassNameToResourcePath(aBasePackage) + "/"
                     + myResourcePattern;

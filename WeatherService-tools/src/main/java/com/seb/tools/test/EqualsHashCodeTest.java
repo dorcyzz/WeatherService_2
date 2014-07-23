@@ -28,13 +28,12 @@ public class EqualsHashCodeTest {
             Assert.assertTrue("Instances with default constructor not equal (o2.equals(o1))", o2.equals(o1));
 
             Field[] fields = classUnderTest.getDeclaredFields();
-            for (Field field1 : fields) {
+            for (Field field : fields) {
 
                 // Reset the instances
                 o1 = classUnderTest.newInstance();
                 o2 = classUnderTest.newInstance();
 
-                Field field = field1;
                 if (Modifier.isFinal(field.getModifiers()) || "$jacocoData".equals(field.getName())) {
                     continue;
                 }
@@ -111,7 +110,7 @@ public class EqualsHashCodeTest {
                 } else if (field.getType() == double.class) {
                     field.setDouble(o2, 1);
                 } else if (Date.class.isAssignableFrom(field.getType())) {
-                    field.set(o2, new LocalDate().toDateMidnight().toDate());
+                    field.set(o2, new LocalDate().toDateTimeAtStartOfDay().toDate());
                 } else if (field.getType().isEnum()) {
                     field.set(o2, field.getType().getEnumConstants()[1]);
                 } else if (Object.class.isAssignableFrom(field.getType())) {
@@ -136,10 +135,7 @@ public class EqualsHashCodeTest {
                 Assert.assertFalse("Instances with o1 having " + field.getName() + " set and o2 having it set to a different object are equal", o1.equals(o2));
             }
 
-        } catch (InstantiationException e) {
-            LOGGER.error("ERROR", e);
-            throw new AssertionError("Unable to construct an instance of the class under test");
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             LOGGER.error("ERROR", e);
             throw new AssertionError("Unable to construct an instance of the class under test");
         }
@@ -148,11 +144,9 @@ public class EqualsHashCodeTest {
     public static void assertMeetsHashCodeContract(Class<?> classUnderTest) {
         try {
             Field[] fields = classUnderTest.getDeclaredFields();
-            for (Field field1 : fields) {
+            for (Field field : fields) {
                 Object o1 = classUnderTest.newInstance();
                 int initialHashCode = o1.hashCode();
-
-                Field field = field1;
 
                 if (Modifier.isFinal(field.getModifiers()) || "$jacocoData".equals(field.getName())) {
                     continue;
@@ -196,10 +190,7 @@ public class EqualsHashCodeTest {
                 Assert.assertFalse("The field " + field.getName() + " was not taken into account for the hashCode contract ",
                         initialHashCode == updatedHashCode);
             }
-        } catch (InstantiationException e) {
-            LOGGER.error("ERROR", e);
-            throw new AssertionError("Unable to construct an instance of the class under test");
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             LOGGER.error("ERROR", e);
             throw new AssertionError("Unable to construct an instance of the class under test");
         }

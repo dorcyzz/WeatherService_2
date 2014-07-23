@@ -19,7 +19,7 @@ import static org.apache.commons.lang3.StringUtils.capitalize;
 
 public abstract class GetterSetterTest {
 
-    private Set<Class<?>> classes = new HashSet<Class<?>>();
+    private Set<Class<?>> classes = new HashSet<>();
 
     protected void touch(Class<?> clazz) throws Exception {
         Class<?> testedClass = clazz;
@@ -45,26 +45,24 @@ public abstract class GetterSetterTest {
                 } catch (Exception ex) {
                 }
                 try {
-                    if (testExtraType(object, clazz, field)) {
-
-                    } else if (Float.class.isAssignableFrom(field.getType()) || Float.TYPE.isAssignableFrom(field.getType())) {
-                        ModelUtil.setValue(clazz, object, Float.valueOf(1), field.getType(), "set" + capitalize(field.getName()));
+                    if (Float.class.isAssignableFrom(field.getType()) || Float.TYPE.isAssignableFrom(field.getType())) {
+                        ModelUtil.setValue(clazz, object, (float) 1, field.getType(), "set" + capitalize(field.getName()));
                     } else if (Integer.class.isAssignableFrom(field.getType()) || Integer.TYPE.isAssignableFrom(field.getType())) {
-                        ModelUtil.setValue(clazz, object, Integer.valueOf(1), field.getType(), "set" + capitalize(field.getName()));
+                        ModelUtil.setValue(clazz, object, 1, field.getType(), "set" + capitalize(field.getName()));
                     } else if (Double.class.isAssignableFrom(field.getType()) || Double.TYPE.isAssignableFrom(field.getType())) {
-                        ModelUtil.setValue(clazz, object, Double.valueOf(1), field.getType(), "set" + capitalize(field.getName()));
+                        ModelUtil.setValue(clazz, object, (double) 1, field.getType(), "set" + capitalize(field.getName()));
                     } else if (BigDecimal.class.isAssignableFrom(field.getType())) {
                         ModelUtil.setValue(clazz, object, new BigDecimal(0), field.getType(), "set" + capitalize(field.getName()));
                     } else if (Date.class.isAssignableFrom(field.getType())) {
                         ModelUtil.setValue(clazz, object, new Date(), field.getType(), "set" + capitalize(field.getName()));
                     } else if (Boolean.class.isAssignableFrom(field.getType()) || Boolean.TYPE.isAssignableFrom(field.getType())) {
-                        ModelUtil.setValue(clazz, object, Boolean.valueOf(true), field.getType(), "set" + capitalize(field.getName()));
+                        ModelUtil.setValue(clazz, object, true, field.getType(), "set" + capitalize(field.getName()));
                     } else if (List.class.isAssignableFrom(field.getType())) {
-                        ModelUtil.setValue(clazz, object, new ArrayList<Object>(), field.getType(), "set" + capitalize(field.getName()));
+                        ModelUtil.setValue(clazz, object, new ArrayList<>(), field.getType(), "set" + capitalize(field.getName()));
                     } else if (Set.class.isAssignableFrom(field.getType())) {
-                        ModelUtil.setValue(clazz, object, new HashSet<Object>(), field.getType(), "set" + capitalize(field.getName()));
+                        ModelUtil.setValue(clazz, object, new HashSet<>(), field.getType(), "set" + capitalize(field.getName()));
                     } else if (Map.class.isAssignableFrom(field.getType())) {
-                        ModelUtil.setValue(clazz, object, new HashMap<Object, Object>(), field.getType(), "set" + capitalize(field.getName()));
+                        ModelUtil.setValue(clazz, object, new HashMap<>(), field.getType(), "set" + capitalize(field.getName()));
                     } else if (field.getType().isEnum()) {
                         ModelUtil.setValue(clazz, object, ((Class<? extends Enum<?>>) field.getType()).getEnumConstants()[0], field.getType(), "set"
                                 + capitalize(field.getName()));
@@ -92,14 +90,6 @@ public abstract class GetterSetterTest {
         }
     }
 
-    /**
-     * This method can be overridden to test an extra Type
-     *
-     * @param object
-     * @param clazz
-     * @param field  he field
-     * @return true if the field is tested
-     */
     protected boolean testExtraType(Object object, Class<?> clazz, Field field) {
         return false;
     }
@@ -114,9 +104,7 @@ public abstract class GetterSetterTest {
 
     @Before
     public void before() {
-        for (Class<?> clazz : touchableClasses()) {
-            this.classes.add(clazz);
-        }
+        Collections.addAll(this.classes, touchableClasses());
         ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider();
         // provider.addExcludeFilter(new NotInstanciatableFilter());
         // provider.addExcludeFilter(new RegexPatternTypeFilter(Pattern.compile(".*[U|u]til.*")));
@@ -157,7 +145,7 @@ public abstract class GetterSetterTest {
             return BigDecimal.ONE;
         }
         if (clazz == List.class) {
-            return new ArrayList<Object>();
+            return new ArrayList<>();
         }
         if (clazz == String.class) {
             return "";

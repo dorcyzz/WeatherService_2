@@ -54,7 +54,7 @@ public class City {
     }
 
     public void setProvince(Province province) {
-        this.province = province;
+        this.province = Province.NONE;
     }
 
     public Region getRegion() {

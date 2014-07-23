@@ -88,7 +88,7 @@ public final class ModelUtil {
      */
     public static Object getValue(Class<?> aClass, Object anObject, String aMethodName) {
 
-        Method theGetterMethod = null;
+        Method theGetterMethod;
         try {
             theGetterMethod = aClass.getDeclaredMethod(aMethodName);
         } catch (NoSuchMethodException anException) {
@@ -99,9 +99,7 @@ public final class ModelUtil {
             // invoke the method
             try {
                 return theGetterMethod.invoke(anObject);
-            } catch (InvocationTargetException anException) {
-                throw new IllegalArgumentException(anException);
-            } catch (IllegalAccessException anException) {
+            } catch (InvocationTargetException | IllegalAccessException anException) {
                 throw new IllegalArgumentException(anException);
             }
         }
@@ -130,18 +128,14 @@ public final class ModelUtil {
         Method theSetterMethod;
         try {
             theSetterMethod = aclass.getDeclaredMethod(aMethodName, aValueClass);
-        } catch (SecurityException anException) {
-            throw new IllegalArgumentException(anException);
-        } catch (NoSuchMethodException anException) {
+        } catch (SecurityException | NoSuchMethodException anException) {
             throw new IllegalArgumentException(anException);
         }
 
         // invoke the method
         try {
             theSetterMethod.invoke(anObject, aValue);
-        } catch (IllegalAccessException anException) {
-            throw new IllegalArgumentException(anException);
-        } catch (InvocationTargetException anException) {
+        } catch (IllegalAccessException | InvocationTargetException anException) {
             throw new IllegalArgumentException(anException);
         }
     }
@@ -278,7 +272,7 @@ public final class ModelUtil {
      */
     @SuppressWarnings("unchecked")
     public static <T> T getClone(T anObject) {
-        Object theClone = null;
+        Object theClone;
         try {
             ByteArrayOutputStream theOutputSTream = new ByteArrayOutputStream();
             ObjectOutput theOutput = new ObjectOutputStream(theOutputSTream);
