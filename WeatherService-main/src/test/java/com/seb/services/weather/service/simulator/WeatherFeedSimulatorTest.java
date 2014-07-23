@@ -1,6 +1,5 @@
-package simulator;
+package com.seb.services.weather.service.simulator;
 
-import com.seb.services.weather.service.simulator.WeatherFeed;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

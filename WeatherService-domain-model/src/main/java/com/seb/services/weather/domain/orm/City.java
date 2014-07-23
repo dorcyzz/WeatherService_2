@@ -4,6 +4,7 @@ import com.seb.services.weather.domain.enums.Province;
 import com.seb.services.weather.domain.enums.Region;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,10 +24,10 @@ public class City {
     private Region region;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "name")
-    private List<TemperatureHistory> temperatureHistory;
+    private List<TemperatureHistory> temperatureHistory = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "name")
-    private List<WeatherHistory> weatherHistory;
+    private List<WeatherHistory> weatherHistory = new ArrayList<>();
 
     public City() {
         super();
