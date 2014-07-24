@@ -23,7 +23,7 @@ public class CityDaoImplTest {
 
     @Test
     public void testCrud() {
-        City testCity2014 = cityDao.getCity("TestCity2014");
+        City testCity2014 = cityDao.findByPrimaryKey("TestCity2014");
 
         assertNull(testCity2014);
 
@@ -34,7 +34,7 @@ public class CityDaoImplTest {
         city.setRegion(Region.WALLONIA);
         cityDao.save(city);
 
-        testCity2014 = cityDao.getCity("TestCity2014");
+        testCity2014 = cityDao.findByPrimaryKey("TestCity2014");
 
         assertNotNull(testCity2014);
         assertEquals("TestCity2014", testCity2014.getName());
@@ -45,7 +45,7 @@ public class CityDaoImplTest {
         testCity2014.setPopulation(1000);
         cityDao.update(testCity2014);
 
-        testCity2014 = cityDao.getCity("TestCity2014");
+        testCity2014 = cityDao.findByPrimaryKey("TestCity2014");
 
         assertNotNull(testCity2014);
         assertEquals("TestCity2014", testCity2014.getName());
@@ -53,9 +53,9 @@ public class CityDaoImplTest {
         assertEquals(Province.NONE, testCity2014.getProvince());
         assertEquals(Region.WALLONIA, testCity2014.getRegion());
 
-        cityDao.delete("testCity2014");
+        cityDao.delete(testCity2014);
 
-        testCity2014 = cityDao.getCity("TestCity2014");
+        testCity2014 = cityDao.findByPrimaryKey("TestCity2014");
 
         assertNull(testCity2014);
     }

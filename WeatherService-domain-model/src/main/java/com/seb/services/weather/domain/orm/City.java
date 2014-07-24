@@ -26,7 +26,7 @@ public class City {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "name")
     private List<TemperatureHistory> temperatureHistory = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "name")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "name")
     private List<WeatherHistory> weatherHistory = new ArrayList<>();
 
     public City() {
@@ -113,6 +113,6 @@ public class City {
 
     @Override
     public String toString() {
-        return "The city of " + getName() + " , population = " + getPopulation() + ", region = " + getRegion() + ", Province = " + getProvince();
+        return "The city of " + getName() + " , population = " + getPopulation() + ", region = " + getRegion() + ", Province = " + getProvince() + ", WeatherHistoryList = " + getWeatherHistory();
     }
 }

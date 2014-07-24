@@ -1,5 +1,6 @@
-package com.seb.services.weather.dao;
+package com.seb.services.weather.dao.impl;
 
+import com.seb.services.weather.dao.CityDao;
 import com.seb.services.weather.domain.orm.City;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -35,7 +36,7 @@ public class CityDaoImpl implements CityDao {
     }
 
     @Override
-    public List<City> list() {
+    public List<City> findAll() {
         return (List<City>) getCurrentSession()
                 .createCriteria(City.class)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
@@ -55,14 +56,12 @@ public class CityDaoImpl implements CityDao {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void delete(String name) {
-        City cityToDelete = new City();
-        cityToDelete.setName(name);
-        getCurrentSession().delete(cityToDelete);
+    public void delete(City city) {
+        getCurrentSession().delete(city);
     }
 
     @Override
-    public City getCity(String name) {
+    public City findByPrimaryKey(String name) {
         Query query = getCurrentSession().createQuery("from City where name = :name ");
         query.setParameter("name", name);
 

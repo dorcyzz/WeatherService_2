@@ -23,7 +23,7 @@ public class WeatherFeedSimulator implements WeatherFeed {
         ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
         CityDao cityDao = context.getBean(CityDao.class);
 
-        System.out.println(cityDao.list());
+        System.out.println(cityDao.findAll());
 
 //        City city = new City();
 //        city.setName("Brussels");
@@ -35,11 +35,11 @@ public class WeatherFeedSimulator implements WeatherFeed {
 
 //        cityDao.delete(2);
 //        cityDao.save(city);
-        City brussels = cityDao.getCity("Brussels");
+        City brussels = cityDao.findByPrimaryKey("Brussels");
         brussels.setPopulation(1138854);
         cityDao.update(brussels);
 
-        System.out.println(cityDao.list());
+        System.out.println(cityDao.findAll());
     }
 
     @Override

@@ -7,15 +7,15 @@ import java.util.List;
 /**
  * Created by sebastien.vandamme@gmail.com on 12/07/2014.
  */
-public interface CityDao {
+public interface CityDao extends GenericDao<City, String> {
 
-    City getCity(String name);
+    void save(City city);
 
-    public List<City> list();
+    void update(City city);
 
-    public void save(City city);
+    void delete(City name);
 
-    public void update(City city);
+    City findByPrimaryKey(String id);
 
-    public void delete(String name);
+    List<City> findAll();
 }

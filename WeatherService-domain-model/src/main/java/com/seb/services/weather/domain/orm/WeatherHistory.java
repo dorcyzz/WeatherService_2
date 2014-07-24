@@ -2,7 +2,7 @@ package com.seb.services.weather.domain.orm;
 
 import com.seb.services.weather.domain.enums.WeatherType;
 import org.hibernate.annotations.Type;
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -25,11 +25,9 @@ public class WeatherHistory {
     @Enumerated(EnumType.STRING)
     private WeatherType weather;
 
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDate")
-    private LocalDate date;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime date;
 
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
-    private LocalDate time;
 
     public WeatherHistory() {
         super();
@@ -64,19 +62,13 @@ public class WeatherHistory {
         this.weather = weather;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
-    public LocalDate getTime() {
-        return time;
-    }
 
-    public void setTime(LocalDate time) {
-        this.time = time;
-    }
 }
