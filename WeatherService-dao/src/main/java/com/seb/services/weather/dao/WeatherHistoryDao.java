@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface WeatherHistoryDao extends GenericDao<WeatherHistory, Integer> {
 
-    void save(WeatherHistory weatherHistory);
+    Integer save(WeatherHistory weatherHistory);
 
     void update(WeatherHistory weatherHistory);
 

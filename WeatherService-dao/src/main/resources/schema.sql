@@ -30,19 +30,17 @@ CREATE TABLE City (
 
 CREATE TABLE TemperatureHistory (
   id          INTEGER      NOT NULL AUTO_INCREMENT,
-  date        DATE,
+  date        DATETIME,
   name        VARCHAR(255),
   temperature INTEGER      NOT NULL,
-  time        TIME,
   cityName    VARCHAR(255) NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE WeatherHistory (
   id       INTEGER      NOT NULL AUTO_INCREMENT,
-  date     DATE,
+  date     DATETIME,
   name     VARCHAR(255),
-  time     TIME,
   weather  VARCHAR(255),
   cityName VARCHAR(255) NOT NULL,
   PRIMARY KEY (id)

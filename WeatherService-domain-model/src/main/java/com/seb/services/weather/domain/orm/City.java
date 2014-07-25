@@ -23,7 +23,7 @@ public class City {
     @Enumerated(EnumType.STRING)
     private Region region;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "name")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "name")
     private List<TemperatureHistory> temperatureHistory = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "name")
@@ -113,6 +113,13 @@ public class City {
 
     @Override
     public String toString() {
-        return "The city of " + getName() + " , population = " + getPopulation() + ", region = " + getRegion() + ", Province = " + getProvince() + ", WeatherHistoryList = " + getWeatherHistory();
+        return "City{" +
+                "name='" + name + '\'' +
+                ", population=" + population +
+                ", province=" + province +
+                ", region=" + region +
+                ", temperatureHistory=" + temperatureHistory +
+                ", weatherHistory=" + weatherHistory +
+                '}';
     }
 }

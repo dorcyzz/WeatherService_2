@@ -70,5 +70,39 @@ public class WeatherHistory {
         this.date = date;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WeatherHistory)) return false;
 
+        WeatherHistory that = (WeatherHistory) o;
+
+        if (id != that.id) return false;
+        if (city != null ? !city.equals(that.city) : that.city != null) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (weather != that.weather) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (weather != null ? weather.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "WeatherHistory{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", weather=" + weather +
+                ", date=" + date +
+                '}';
+    }
 }

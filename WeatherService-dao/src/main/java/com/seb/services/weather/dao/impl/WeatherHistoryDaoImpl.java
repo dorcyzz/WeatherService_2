@@ -1,7 +1,8 @@
 package com.seb.services.weather.dao.impl;
 
-import com.seb.services.weather.dao.CityDao;
+import com.seb.services.weather.dao.WeatherHistoryDao;
 import com.seb.services.weather.domain.orm.City;
+import com.seb.services.weather.domain.orm.WeatherHistory;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -19,15 +20,15 @@ import java.util.List;
  */
 @Repository
 @Transactional(propagation = Propagation.REQUIRED, readOnly = true, isolation = Isolation.READ_UNCOMMITTED)
-public class CityDaoImpl implements CityDao {
+public class WeatherHistoryDaoImpl implements WeatherHistoryDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    protected CityDaoImpl() {
+    protected WeatherHistoryDaoImpl() {
         super();
     }
 
-    public CityDaoImpl(SessionFactory sessionFactory) {
+    public WeatherHistoryDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -36,39 +37,39 @@ public class CityDaoImpl implements CityDao {
     }
 
     @Override
-    public List<City> findAll() {
-        return (List<City>) getCurrentSession()
+    public List<WeatherHistory> findAll() {
+        return (List<WeatherHistory>) getCurrentSession()
                 .createCriteria(City.class)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public String save(City city) {
-        return (String) getCurrentSession().save(city);
+    public Integer save(WeatherHistory weatherHistory) {
+        return (Integer) getCurrentSession().save(weatherHistory);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void update(City city) {
-        getCurrentSession().update(city);
+    public void update(WeatherHistory weatherHistory) {
+        getCurrentSession().update(weatherHistory);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void delete(City city) {
-        getCurrentSession().delete(city);
+    public void delete(WeatherHistory weatherHistory) {
+        getCurrentSession().delete(weatherHistory);
     }
 
     @Override
-    public City findByPrimaryKey(String name) {
-        Query query = getCurrentSession().createQuery("from City where name = :name ");
-        query.setParameter("name", name);
+    public WeatherHistory findByPrimaryKey(Integer id) {
+        Query query = getCurrentSession().createQuery("from WeatherHistory where id = :id ");
+        query.setParameter("id", id);
 
-        List<City> cities = (List<City>) query.list();
+        List<WeatherHistory> weatherHistories = (List<WeatherHistory>) query.list();
 
-        if (cities != null && !cities.isEmpty()) {
-            return cities.get(0);
+        if (weatherHistories != null && !weatherHistories.isEmpty()) {
+            return weatherHistories.get(0);
         }
 
         return null;

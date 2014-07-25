@@ -5,6 +5,7 @@ import com.seb.services.weather.domain.enums.Province;
 import com.seb.services.weather.domain.enums.Region;
 import com.seb.services.weather.domain.enums.WeatherType;
 import com.seb.services.weather.domain.orm.City;
+import com.seb.services.weather.domain.orm.TemperatureHistory;
 import com.seb.services.weather.domain.orm.WeatherHistory;
 import org.joda.time.LocalDateTime;
 import org.springframework.context.ApplicationContext;
@@ -24,13 +25,7 @@ public class TestMain {
 
         City testCity2014 = cityDao.findByPrimaryKey("TestCity2014");
 
-
-        System.out.println(testCity2014);
-
-
-        cityDao.delete(testCity2014);
-
-        testCity2014 = cityDao.findByPrimaryKey("TestCity2014");
+        //cityDao.delete(testCity2014);
 
         System.out.println(testCity2014);
 
@@ -58,6 +53,18 @@ public class TestMain {
 
         city.setWeatherHistory(weatherHistoryList);
 
+
+        TemperatureHistory temperatureHistory = new TemperatureHistory();
+        temperatureHistory.setName("TestCity2014");
+        temperatureHistory.setCity(city);
+        temperatureHistory.setDate(LocalDateTime.now());
+        temperatureHistory.setTemperature(37);
+
+        List<TemperatureHistory> temperatureHistoryList = new ArrayList<>();
+        temperatureHistoryList.add(temperatureHistory);
+
+        city.setTemperatureHistory(temperatureHistoryList);
+
         cityDao.save(city);
 
         testCity2014 = cityDao.findByPrimaryKey("TestCity2014");
@@ -75,12 +82,12 @@ public class TestMain {
         System.out.println(testCity2014);
 
 
-//        cityDao.delete(testCity2014);
-//
-//        testCity2014 = cityDao.findByPrimaryKey("TestCity2014");
-//
-//
-//        System.out.println(testCity2014);
+        cityDao.delete(testCity2014);
+
+        testCity2014 = cityDao.findByPrimaryKey("TestCity2014");
+
+
+        System.out.println(testCity2014);
 
     }
 }

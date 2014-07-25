@@ -1,7 +1,7 @@
 package com.seb.services.weather.domain.orm;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -23,11 +23,8 @@ public class TemperatureHistory {
 
     private int temperature;
 
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDate")
-    private LocalDate date;
-
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
-    private LocalDate time;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime date;
 
     public TemperatureHistory() {
         super();
@@ -61,19 +58,47 @@ public class TemperatureHistory {
         this.temperature = temperature;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
-    public LocalDate getTime() {
-        return time;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TemperatureHistory)) return false;
+
+        TemperatureHistory that = (TemperatureHistory) o;
+
+        if (id != that.id) return false;
+        if (temperature != that.temperature) return false;
+        if (city != null ? !city.equals(that.city) : that.city != null) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+
+        return true;
     }
 
-    public void setTime(LocalDate time) {
-        this.time = time;
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + temperature;
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TemperatureHistory{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", temperature=" + temperature +
+                ", date=" + date +
+                '}';
     }
 }

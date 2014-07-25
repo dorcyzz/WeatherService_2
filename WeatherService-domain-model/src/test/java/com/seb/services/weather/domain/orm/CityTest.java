@@ -1,14 +1,12 @@
 package com.seb.services.weather.domain.orm;
 
-import com.seb.tools.test.GetterSetterTest;
 
+public class CityTest /*extends GetterSetterTest */ {
 
-public class CityTest extends GetterSetterTest {
-
-    @Override
-    public Class<?>[] touchableClasses() {
-        return new Class<?>[]{City.class};
-    }
+//    @Override
+//    public Class<?>[] touchableClasses() {
+//        return new Class<?>[]{City.class};
+//    }
 
 
 //    @Override

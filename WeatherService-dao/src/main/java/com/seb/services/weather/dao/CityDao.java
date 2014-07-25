@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface CityDao extends GenericDao<City, String> {
 
-    void save(City city);
+    String save(City city);
 
     void update(City city);
 

@@ -8,7 +8,7 @@ import java.util.List;
  */
 public interface GenericDao<T, ID extends Serializable> {
 
-    void save(T entity);
+    ID save(T entity);
 
     void update(T entity);
 

@@ -1,7 +1,7 @@
 package com.seb.services.weather.dao.impl;
 
-import com.seb.services.weather.dao.CityDao;
-import com.seb.services.weather.domain.orm.City;
+import com.seb.services.weather.dao.TemperatureHistoryDao;
+import com.seb.services.weather.domain.orm.TemperatureHistory;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -19,15 +19,15 @@ import java.util.List;
  */
 @Repository
 @Transactional(propagation = Propagation.REQUIRED, readOnly = true, isolation = Isolation.READ_UNCOMMITTED)
-public class CityDaoImpl implements CityDao {
+public class TemperatureHistoryDaoImpl implements TemperatureHistoryDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    protected CityDaoImpl() {
+    protected TemperatureHistoryDaoImpl() {
         super();
     }
 
-    public CityDaoImpl(SessionFactory sessionFactory) {
+    public TemperatureHistoryDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -36,39 +36,39 @@ public class CityDaoImpl implements CityDao {
     }
 
     @Override
-    public List<City> findAll() {
-        return (List<City>) getCurrentSession()
-                .createCriteria(City.class)
+    public List<TemperatureHistory> findAll() {
+        return (List<TemperatureHistory>) getCurrentSession()
+                .createCriteria(TemperatureHistory.class)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public String save(City city) {
-        return (String) getCurrentSession().save(city);
+    public Integer save(TemperatureHistory temperatureHistory) {
+        return (Integer) getCurrentSession().save(temperatureHistory);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void update(City city) {
-        getCurrentSession().update(city);
+    public void update(TemperatureHistory temperatureHistory) {
+        getCurrentSession().update(temperatureHistory);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void delete(City city) {
-        getCurrentSession().delete(city);
+    public void delete(TemperatureHistory temperatureHistory) {
+        getCurrentSession().delete(temperatureHistory);
     }
 
     @Override
-    public City findByPrimaryKey(String name) {
-        Query query = getCurrentSession().createQuery("from City where name = :name ");
-        query.setParameter("name", name);
+    public TemperatureHistory findByPrimaryKey(Integer id) {
+        Query query = getCurrentSession().createQuery("from TemperatureHistory where id = :id ");
+        query.setParameter("id", id);
 
-        List<City> cities = (List<City>) query.list();
+        List<TemperatureHistory> temperatureHistories = (List<TemperatureHistory>) query.list();
 
-        if (cities != null && !cities.isEmpty()) {
-            return cities.get(0);
+        if (temperatureHistories != null && !temperatureHistories.isEmpty()) {
+            return temperatureHistories.get(0);
         }
 
         return null;

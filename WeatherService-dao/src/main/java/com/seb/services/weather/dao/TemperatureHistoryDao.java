@@ -9,13 +9,13 @@ import java.util.List;
  */
 public interface TemperatureHistoryDao extends GenericDao<TemperatureHistory, Integer> {
 
-    void save(TemperatureHistory temperatureHistory);
+    Integer save(TemperatureHistory temperatureHistory);
 
     void update(TemperatureHistory temperatureHistory);
 
     void delete(TemperatureHistory temperatureHistory);
 
-    TemperatureHistory findByPrimaryKey(String id);
+    TemperatureHistory findByPrimaryKey(Integer id);
 
     List<TemperatureHistory> findAll();
 }
