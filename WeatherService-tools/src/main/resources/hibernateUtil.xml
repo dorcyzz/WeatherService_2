@@ -15,8 +15,8 @@
 
         <!--&lt;!&ndash;<mapping package="com.seb.services.weather.domain.orm"/>&ndash;&gt;-->
 
-        <!--<mapping class="com.seb.services.weather.domain.orm.City"/>-->
-        <!--<mapping class="com.seb.services.weather.domain.orm.TemperatureHistory"/>-->
-        <!--<mapping class="com.seb.services.weather.domain.orm.WeatherHistory"/>-->
+        <mapping class="com.seb.services.weather.domain.orm.City"/>
+        <mapping class="com.seb.services.weather.domain.orm.TemperatureHistory"/>
+        <mapping class="com.seb.services.weather.domain.orm.WeatherHistory"/>
     </session-factory>
 </hibernate-configuration>

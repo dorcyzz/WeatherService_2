@@ -4,8 +4,8 @@ import com.seb.services.weather.domain.enums.Province;
 import com.seb.services.weather.domain.enums.Region;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by sebastien.vandamme@gmail.com on 12/07/2014.
@@ -24,10 +24,10 @@ public class City {
     private Region region;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "name")
-    private List<TemperatureHistory> temperatureHistory = new ArrayList<>();
+    private Set<TemperatureHistory> temperatureHistory = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "name")
-    private List<WeatherHistory> weatherHistory = new ArrayList<>();
+    private Set<WeatherHistory> weatherHistory = new HashSet<>();
 
     public City() {
         super();
@@ -54,7 +54,7 @@ public class City {
     }
 
     public void setProvince(Province province) {
-        this.province = Province.NONE;
+        this.province = province;
     }
 
     public Region getRegion() {
@@ -65,19 +65,19 @@ public class City {
         this.region = region;
     }
 
-    public List<TemperatureHistory> getTemperatureHistory() {
+    public Set<TemperatureHistory> getTemperatureHistory() {
         return temperatureHistory;
     }
 
-    public void setTemperatureHistory(List<TemperatureHistory> temperatureHistory) {
+    public void setTemperatureHistory(Set<TemperatureHistory> temperatureHistory) {
         this.temperatureHistory = temperatureHistory;
     }
 
-    public List<WeatherHistory> getWeatherHistory() {
+    public Set<WeatherHistory> getWeatherHistory() {
         return weatherHistory;
     }
 
-    public void setWeatherHistory(List<WeatherHistory> weatherHistory) {
+    public void setWeatherHistory(Set<WeatherHistory> weatherHistory) {
         this.weatherHistory = weatherHistory;
     }
 

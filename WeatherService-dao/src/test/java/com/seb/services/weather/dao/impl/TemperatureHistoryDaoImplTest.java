@@ -15,6 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -76,5 +78,62 @@ public class TemperatureHistoryDaoImplTest {
         temperatureHistory = temperatureHistoryDao.findByPrimaryKey(id);
 
         assertNull(temperatureHistory);
+    }
+
+    @Test
+    public void testFindAll() {
+        List<TemperatureHistory> temperatureHistories = temperatureHistoryDao.findAll();
+
+        assertEquals(0, temperatureHistories.size());
+
+        City city = new City();
+        city.setName("TestCity2014");
+        city.setPopulation(50000000);
+        city.setProvince(Province.NONE);
+        city.setRegion(Region.WALLONIA);
+        cityDao.save(city);
+        City testCity2014 = cityDao.findByPrimaryKey("TestCity2014");
+
+        assertNotNull(testCity2014);
+
+        TemperatureHistory weatherHistory1 = new TemperatureHistory();
+        weatherHistory1.setName("TestCity2014");
+        weatherHistory1.setCity(city);
+        final LocalDateTime now1 = LocalDateTime.now();
+        weatherHistory1.setDate(now1);
+        weatherHistory1.setTemperature(42);
+
+        Integer id1 = temperatureHistoryDao.save(weatherHistory1);
+
+        TemperatureHistory weatherHistory2 = new TemperatureHistory();
+        weatherHistory2.setName("TestCity2014");
+        weatherHistory2.setCity(city);
+        final LocalDateTime now2 = LocalDateTime.now();
+        weatherHistory2.setDate(now2);
+        weatherHistory2.setTemperature(40);
+
+        Integer id2 = temperatureHistoryDao.save(weatherHistory2);
+
+        temperatureHistories = temperatureHistoryDao.findAll();
+
+        assertEquals(2, temperatureHistories.size());
+
+        weatherHistory1 = temperatureHistories.get(0);
+
+        assertNotNull(weatherHistory1);
+        assertEquals("TestCity2014", weatherHistory1.getName());
+        assertEquals(id1.intValue(), weatherHistory1.getId());
+        assertEquals(testCity2014, weatherHistory1.getCity());
+        assertEquals(now1, weatherHistory1.getDate());
+        assertEquals(42, weatherHistory1.getTemperature());
+
+        weatherHistory2 = temperatureHistories.get(1);
+
+        assertNotNull(weatherHistory2);
+        assertEquals("TestCity2014", weatherHistory2.getName());
+        assertEquals(id2.intValue(), weatherHistory2.getId());
+        assertEquals(testCity2014, weatherHistory2.getCity());
+        assertEquals(now2, weatherHistory2.getDate());
+        assertEquals(40, weatherHistory2.getTemperature());
     }
 }

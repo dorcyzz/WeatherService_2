@@ -27,9 +27,9 @@ public class CityDaoImpl implements CityDao {
         super();
     }
 
-    public CityDaoImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+//    public CityDaoImpl(SessionFactory sessionFactory) {
+//        this.sessionFactory = sessionFactory;
+//    }
 
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();

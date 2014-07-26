@@ -75,7 +75,6 @@ public class TemperatureHistory {
 
         if (id != that.id) return false;
         if (temperature != that.temperature) return false;
-        if (city != null ? !city.equals(that.city) : that.city != null) return false;
         if (date != null ? !date.equals(that.date) : that.date != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
@@ -86,7 +85,6 @@ public class TemperatureHistory {
     public int hashCode() {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + temperature;
         result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;

@@ -1,7 +1,6 @@
 package com.seb.services.weather.dao.impl;
 
 import com.seb.services.weather.dao.WeatherHistoryDao;
-import com.seb.services.weather.domain.orm.City;
 import com.seb.services.weather.domain.orm.WeatherHistory;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -28,10 +27,6 @@ public class WeatherHistoryDaoImpl implements WeatherHistoryDao {
         super();
     }
 
-    public WeatherHistoryDaoImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
@@ -39,7 +34,7 @@ public class WeatherHistoryDaoImpl implements WeatherHistoryDao {
     @Override
     public List<WeatherHistory> findAll() {
         return (List<WeatherHistory>) getCurrentSession()
-                .createCriteria(City.class)
+                .createCriteria(WeatherHistory.class)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 

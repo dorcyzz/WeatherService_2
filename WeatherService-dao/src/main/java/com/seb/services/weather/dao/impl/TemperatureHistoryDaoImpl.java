@@ -27,10 +27,6 @@ public class TemperatureHistoryDaoImpl implements TemperatureHistoryDao {
         super();
     }
 
-    public TemperatureHistoryDaoImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
