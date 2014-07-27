@@ -33,9 +33,12 @@ public class WeatherHistoryDaoImpl implements WeatherHistoryDao {
 
     @Override
     public List<WeatherHistory> findAll() {
-        return (List<WeatherHistory>) getCurrentSession()
+        @SuppressWarnings("unchecked")
+        List results = (List<WeatherHistory>) getCurrentSession()
                 .createCriteria(WeatherHistory.class)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+        return results;
     }
 
     @Override

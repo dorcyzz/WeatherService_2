@@ -33,9 +33,12 @@ public class TemperatureHistoryDaoImpl implements TemperatureHistoryDao {
 
     @Override
     public List<TemperatureHistory> findAll() {
-        return (List<TemperatureHistory>) getCurrentSession()
+        @SuppressWarnings("unchecked")
+        List results = (List<TemperatureHistory>) getCurrentSession()
                 .createCriteria(TemperatureHistory.class)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+        return results;
     }
 
     @Override

@@ -1,0 +1,7 @@
+
+.idea/
+target/
+WeatherService-dao/WeatherService-dao.iml
+WeatherService-domain-model/WeatherService-domain-model.iml
+WeatherService-main/WeatherService-main.iml
+WeatherService-tools/WeatherService-tools.iml

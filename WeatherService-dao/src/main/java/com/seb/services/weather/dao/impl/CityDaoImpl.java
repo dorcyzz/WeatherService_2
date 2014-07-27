@@ -37,9 +37,12 @@ public class CityDaoImpl implements CityDao {
 
     @Override
     public List<City> findAll() {
-        return (List<City>) getCurrentSession()
+        @SuppressWarnings("unchecked")
+        List results = (List<City>) getCurrentSession()
                 .createCriteria(City.class)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+        return results;
     }
 
     @Override
