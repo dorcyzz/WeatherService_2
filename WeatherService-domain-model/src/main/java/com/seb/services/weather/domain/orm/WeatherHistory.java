@@ -2,9 +2,11 @@ package com.seb.services.weather.domain.orm;
 
 import com.seb.services.weather.domain.enums.WeatherType;
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by sebastien.vandamme@gmail.com on 15/07/2014.
@@ -16,16 +18,20 @@ public class WeatherHistory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotBlank
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cityName", nullable = false)
+    @NotNull
     private City city;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private WeatherType weather;
 
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    @NotNull
     private LocalDateTime date;
 
 
@@ -71,7 +77,7 @@ public class WeatherHistory {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof WeatherHistory)) return false;
 
@@ -86,7 +92,7 @@ public class WeatherHistory {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (weather != null ? weather.hashCode() : 0);

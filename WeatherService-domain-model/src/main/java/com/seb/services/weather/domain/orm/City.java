@@ -2,8 +2,11 @@ package com.seb.services.weather.domain.orm;
 
 import com.seb.services.weather.domain.enums.Province;
 import com.seb.services.weather.domain.enums.Region;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,20 +16,27 @@ import java.util.Set;
 @Entity
 public class City {
     @Id
+    @NotBlank
     private String name;
 
-    private int population;
+    @NotNull
+    @Min(500)
+    private Integer population;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private Province province;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private Region region;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "name")
+    @NotNull
     private Set<TemperatureHistory> temperatureHistory = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "name")
+    @NotNull
     private Set<WeatherHistory> weatherHistory = new HashSet<>();
 
     public City() {
@@ -41,11 +51,11 @@ public class City {
         this.name = name;
     }
 
-    public int getPopulation() {
+    public Integer getPopulation() {
         return population;
     }
 
-    public void setPopulation(int population) {
+    public void setPopulation(Integer population) {
         this.population = population;
     }
 
@@ -82,14 +92,14 @@ public class City {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof City)) return false;
 
         City city = (City) o;
 
-        if (population != city.population) return false;
         if (name != null ? !name.equals(city.name) : city.name != null) return false;
+        if (population != null ? !population.equals(city.population) : city.population != null) return false;
         if (province != city.province) return false;
         if (region != city.region) return false;
         if (temperatureHistory != null ? !temperatureHistory.equals(city.temperatureHistory) : city.temperatureHistory != null)
@@ -101,9 +111,9 @@ public class City {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + population;
+        result = 31 * result + (population != null ? population.hashCode() : 0);
         result = 31 * result + (province != null ? province.hashCode() : 0);
         result = 31 * result + (region != null ? region.hashCode() : 0);
         result = 31 * result + (temperatureHistory != null ? temperatureHistory.hashCode() : 0);
